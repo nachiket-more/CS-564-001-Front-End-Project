@@ -1,0 +1,57 @@
+.top{
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: 40% 60%; */
+    height: 40vh;
+    width: 100vw;
+}
+.card-container{
+    margin: 1vw;
+    display: grid;
+    grid-template-rows: 10% 90%;
+}
+
+.airlines-card{
+    height: calc(40vh - 2vw);
+    width: auto;
+    aspect-ratio: 1 / 1;
+}
+
+.card-title{
+    font-weight: 500;
+    text-align: left;
+    margin-left: 1vw;
+}
+
+.card{
+    background-color: #434F65;
+    border-radius: 10px;
+}
+
+.airlines{
+    height: 100%;
+    width: 100%;
+}
+
+
+.airline-delays-card{
+    height: calc(100% - 2vw);
+    width: calc(100% - 2vw);
+}
+
+.airline-delays{
+}
+
+.bottom{
+    height: fit-content;
+    width: 100vw;
+    width: calc(100% - 2vw);
+    padding: 1vw;
+}
+.history-delays{
+    position: relative;
+    background-color: #434F65;
+    height: 40vh;
+    width: 100%;
+    border-radius: 10px;
+}

@@ -5,9 +5,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  background-color: #21293A;
+  color: #828c9f;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.MuiTable-root{
+  background-color: #21293A;
+}
+.MuiTableCell-root{
+  color: white !important;
+  border: none !important;
+  text-align: center !important;
+  font-family: 'Montserrat', sans-serif !important;
 }
