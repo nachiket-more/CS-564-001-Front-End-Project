@@ -1,0 +1,12 @@
+:root {
+  --black: #020202;
+  --white: #ffffff;
+  --blue: #00425c;
+  --cyan: #bce0e6;
+}
+
+body {
+  background-color: var(--cyan);
+  padding-left: 20px;
+  padding-right: 20px;
+}
