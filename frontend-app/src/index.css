@@ -6,9 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-  background-color: #21293A;
-  color: #828c9f;
+  background-color: #EFEFEF;
+  color: #000;
   font-family: 'Montserrat', sans-serif !important;
+  overflow-x: hidden;
 }
 
 code {
@@ -24,4 +25,36 @@ code {
   border: none !important;
   text-align: center !important;
   font-family: 'Montserrat', sans-serif !important;
+}
+
+.btn-primary{
+  background-color: #011638;
+  border-color: #011638;
+  border-radius: 50px;
+  font-weight: 600;
+}
+.btn-primary::after{
+  margin-left: 10px;
+  top: 2px;
+  position: relative;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+  background-color: #011638 !important;
+  border-color: #011638 !important;
+}
+
+.dropdown-menu.show {
+  display: block;
+  max-height: 300px;
+  overflow-y: scroll;
+  background-color: #9055A2;
+  border-radius: 10px;
+}
+.dropdown-item{
+  color: white;
+  font-weight: 500;
+}
+.dropdown-item:hover{
+  background-color: unset;
+  color: white;
 }
