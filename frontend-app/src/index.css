@@ -17,15 +17,20 @@ code {
     monospace;
 }
 
-.MuiTable-root{
-  background-color: #21293A;
+
+
+.MuiPaper-root{
+  /* background-color: #21293A; */
+  box-shadow: unset !important;
 }
 .MuiTableCell-root{
-  color: white !important;
+  /* color: white !important; */
   border: none !important;
   text-align: center !important;
   font-family: 'Montserrat', sans-serif !important;
 }
+
+
 
 .btn-primary{
   background-color: #011638;
