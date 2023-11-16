@@ -1,0 +1,18 @@
+:root{
+    --navbar : rgb(42, 42, 238);
+}
+
+.nav-pills li a:hover,
+.nav-pills li a:focus {
+    background-color: var(--navbar);
+    text-decoration: none solid 4px;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: cursive;
+    color: var(--white);
+  }
+
+  
