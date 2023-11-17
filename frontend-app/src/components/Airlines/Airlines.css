@@ -2,14 +2,15 @@
     display: flex;
     flex-direction: row;
     height: 60vh;
-    width: 100vw;
+    width: 100%;
 }
+
 
 .card-container{
     margin: 10px;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 20px;
     padding: 20px;
 }
@@ -34,8 +35,6 @@
 }
 
 
-
-
 .airline-delays-card{
     width: calc(60% - 20px);
     height: calc(100% - 20px);
@@ -51,11 +50,9 @@
 
 .bottom{
     min-height: 50vh;
-    width: 100vw;
+    width: 100%;
 }
 
-.history-card{
-}
 
 .history-card > div{
     display: flex;

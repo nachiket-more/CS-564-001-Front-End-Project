@@ -123,7 +123,7 @@ const Airlines = () => {
   }, [airlineCount]);
 
   return (
-    <div className="airlines-container">
+    <div className="page-container airlines-container">
       <div className="top">
 
         <div className="card-container airlines-card">
