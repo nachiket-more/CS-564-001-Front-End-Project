@@ -1,0 +1,85 @@
+.flights-container .top{
+    display: flex;
+    flex-direction: row;
+    height: 10vh;
+    width: 100vw;
+}
+
+.flights-container .card-container{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+/* .flights-container .airlines-card{
+    width: 40%;
+    height: calc(100% - 20px);
+} */
+
+.flights-container .card-title{
+    font-weight: 700;
+    font-size: 20px !important;
+    height: fit-content;
+    text-align: left;
+    margin-bottom: 1vw;
+}
+
+
+/* .flights-container .airlines{
+    height: 100%;
+    width: 100%;
+}
+
+
+
+
+.flights-container .airline-delays-card{
+    width: calc(60% - 20px);
+    height: calc(100% - 20px);
+}
+
+
+.flights-container .airline-delays{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+} */
+
+
+.flights-container .bottom{
+    min-height: 50vh;
+    width: 100%;
+    display: flex;
+}
+
+.flights-container .usmap-card{
+    width: 50%;
+}
+
+.flights-container .usmap-card > div{
+    /* display: flex; */
+}
+.flights-container .usmap-card > div > .dropdown{
+    margin-left: auto;
+}
+
+.flights-container .usmap-flights{
+    min-height: 30vh;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+.flights-container .flights-list-card{
+    width: 50%;
+}
+
+.flights-container .flights-list{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 50vh;
+}
