@@ -4,6 +4,7 @@ import './index.css';
 import 'react-tooltip/dist/react-tooltip.css'
 
 import App from './App';
+import './style.css';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
