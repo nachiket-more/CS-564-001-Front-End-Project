@@ -6,6 +6,36 @@
 
   --offwhite: #efefef;
   --navyblue: #011638;
+  --purple: #9055a2;
+  --navyblue1: #2e294e;
+  --pink: #d499b9;
+  --pink1: #e8c1c5;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--navyblue) transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--offwhite);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--navyblue);
+  border-radius: 10px;
+  border: 3px solid transparent;
+}
+
+/* .App {
+=======
   --purple: #9055A2;
   --navyblue1: #2E294E;
   --pink: #D499B9;
@@ -21,33 +51,57 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+} */
+
+.page-container {
+  width: calc(100% - 250px);
+  margin-left: 250px;
+  padding-right: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-primary {
+  background-color: var(--navyblue);
+  border-color: var(--navyblue);
+  border-radius: 50px;
+  font-weight: 600;
+}
+.btn-primary::after {
+  margin-left: 10px;
+  top: 2px;
+  position: relative;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  background-color: var(--navyblue) !important;
+  border-color: var(--navyblue) !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dropdown-menu.show {
+  display: block;
+  max-height: 300px;
+  overflow-y: scroll;
+  background-color: var(--white);
+  border-radius: 10px;
+}
+.dropdown-item {
+  color: var(--navyblue);
+  font-weight: 500;
+}
+.dropdown-item:hover {
+  background-color: unset;
+  color: var(--navyblue);
 }
