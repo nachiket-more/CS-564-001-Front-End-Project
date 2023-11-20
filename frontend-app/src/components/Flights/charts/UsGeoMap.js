@@ -10,14 +10,13 @@ import {
   Line,
 } from "react-simple-maps";
 
-
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 import { DataContext } from "../../../context/DataContext";
 
@@ -34,7 +33,6 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
   const [routesTable, setRoutesTable] = React.useState([]);
 
   const [key, setKey] = React.useState(0);
-  
 
   React.useEffect(() => {
     if (airportsData && flightsData && airlinesData) {
@@ -48,22 +46,18 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
       data.flightsData != null &&
       data.airlinesData != null
     ) {
-      console.log(data);
       setAirlinesData(data.airlinesData);
       setFlightsData(data.flightsData);
       setAirportsData(data.airportsData);
-
-      console.log(data.flightsData.length);
     }
   }, [data]);
 
   const handleSetRoutes = (selectedItem) => {
-    console.log(selectedItem);
     const airlineCode = airlinesData.find(
       (airline) => airline.AIRLINE === selectedItem
     ).IATA_CODE;
 
-    console.log("Airlines is: ", selectedItem, airlineCode);
+    // console.log("Airlines is: ", selectedItem, airlineCode);
 
     const airlineFlights = flightsData.filter(
       (flights) => flights.AIRLINE === airlineCode
@@ -83,18 +77,21 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
       })
     );
 
-    console.log("Flight Routes are: ", routes);
+    // console.log("Flight Routes are: ", routes);
 
-    const flightRows = []
+    const flightRows = [];
     routes.forEach((item) => {
-      let newData = createData(item.dep, item.dep_code, item.arr, item.arr_code);
+      let newData = createData(
+        item.dep,
+        item.dep_code,
+        item.arr,
+        item.arr_code
+      );
       flightRows.push(newData);
     });
 
+    setRoutesTable(flightRows);
 
-    setRoutesTable(flightRows)
-
-    // AIRPORT	CITY	STATE	COUNTRY	LATITUDE	LONGITUDE
     const markers = Array.from(
       new Set(routes.flatMap((route) => [route.dep, route.arr]))
     ).map((city) => {
@@ -108,16 +105,16 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
           }
         : null;
     });
-    console.log("Flight Markers are: ", markers);
+    // console.log("Flight Markers are: ", markers);
     setRoutesData(routes);
     setMarkersData(markers);
 
     // flightValues()
     flightValues({
-      total_flights: routes.length, 
-      total_origins: new Set(routes.map(obj => obj.dep)).size, 
-      total_dest: new Set(routes.map(obj => obj.arr)).size
-    })
+      total_flights: routes.length,
+      total_origins: new Set(routes.map((obj) => obj.dep)).size,
+      total_dest: new Set(routes.map((obj) => obj.arr)).size,
+    });
   };
 
   // Table
@@ -129,30 +126,26 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
   ) {
     return { Origin, Origin_Code, Dest, Dest_Code };
   }
-  
- 
-
 
   const [selectedRoute, setSelectedRoute] = useState({});
-  
+
   const [updateKey, setUpdateKey] = useState(0);
 
   const handleSelectFlight = (event, rowData) => {
     setSelectedRoute({
-      dep: markersData.find((marker) => marker.city === rowData.Origin).coordinates,
-      arr: markersData.find((marker) => marker.city === rowData.Dest).coordinates
-    })
+      dep: markersData.find((marker) => marker.city === rowData.Origin)
+        .coordinates,
+      arr: markersData.find((marker) => marker.city === rowData.Dest)
+        .coordinates,
+    });
   };
-
 
   React.useEffect(() => {
     setUpdateKey(updateKey + 1);
   }, [selectedRoute]);
 
-
-
   return (
-    <div style={{ display: "flex", width:"100%" }}>
+    <div style={{ display: "flex", width: "100%" }}>
       {/* <button onClick={handleButtonClick}>Change Line Color</button> */}
       {markersData != null && (
         <ComposableMap
@@ -171,15 +164,14 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
                   />
                 ))}
 
-              <Line
-                key={updateKey}
-                from={selectedRoute.dep}
-                to={selectedRoute.arr}
-                stroke="#d499b9"
-                strokeWidth={3}
-                strokeLinecap="round"
-              />
-            
+                <Line
+                  key={updateKey}
+                  from={selectedRoute.dep}
+                  to={selectedRoute.arr}
+                  stroke="#d499b9"
+                  strokeWidth={3}
+                  strokeLinecap="round"
+                />
 
                 {markersData.map(
                   ({ markerOffset, code, city, coordinates }) => {
@@ -223,31 +215,38 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
       <div className="card-container flights-list-card">
         {/* <div className="card-title">{selectedAirline} Flights</div> */}
         <div className="flights-list">
-                  {
-                    routesTable.length > 1 &&
-                    <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 0 }} aria-label="simple table">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell align="center" style={{ minWidth: 0 }}>ORIGIN</TableCell>
-                          <TableCell align="center" style={{ minWidth: 0 }}>DESTINATION</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {routesTable.map((row) => (
-                          <TableRow
-                            key={row.airline}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            onClick={(event) => handleSelectFlight(event, row)}
-                          >
-                            <TableCell align="center" style={{ minWidth: 0 }}>{row.Origin}</TableCell>
-                            <TableCell align="center" style={{ minWidth: 0 }}>{row.Dest}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                  }
+          {routesTable.length > 1 && (
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 0 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center" style={{ minWidth: 0 }}>
+                      ORIGIN
+                    </TableCell>
+                    <TableCell align="center" style={{ minWidth: 0 }}>
+                      DESTINATION
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {routesTable.map((row) => (
+                    <TableRow
+                      key={row.airline}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                      onClick={(event) => handleSelectFlight(event, row)}
+                    >
+                      <TableCell align="center" style={{ minWidth: 0 }}>
+                        {row.Origin}
+                      </TableCell>
+                      <TableCell align="center" style={{ minWidth: 0 }}>
+                        {row.Dest}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
         </div>
       </div>
     </div>

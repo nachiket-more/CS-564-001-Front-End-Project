@@ -1,7 +1,6 @@
 import React from "react";
 import "./Flights.css";
 import UsGeoMap from "./charts/UsGeoMap";
-import FlightsTable from "./charts/FlightsTable";
 import { useSelector } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
 
@@ -15,7 +14,6 @@ const Flights = () => {
   const [flightsData, setFlightsData] = React.useState(null);
   const [airportsData, setAirportsData] = React.useState(null);
 
-
   const [key, setKey] = React.useState(0);
 
   const [selectedAirline, setSelectedAirline] = React.useState(
@@ -28,7 +26,7 @@ const Flights = () => {
       data.flightsData != null &&
       data.airlinesData != null
     ) {
-      console.log(data);
+      // console.log(data);
       setAirlinesData(data.airlinesData);
       setFlightsData(data.flightsData);
       setAirportsData(data.airportsData);
@@ -51,18 +49,17 @@ const Flights = () => {
   //   }
   // },[airportsData, flightsData, airlinesData])
 
-  
   const [totalAirlines, setTotalAirlines] = React.useState(13);
   const [totalFlights, setTotalFlights] = React.useState(null);
   const [totalOrigins, setTotalOrigins] = React.useState(null);
   const [totalDest, setTotalDest] = React.useState(null);
 
-  const handleFlightValues = (data) =>{
+  const handleFlightValues = (data) => {
     // console.log('Flight values from Flight.js: ', data)
-    setTotalFlights(data.total_flights)
-    setTotalOrigins(data.total_origins)
-    setTotalDest(data.total_dest)
-  }
+    setTotalFlights(data.total_flights);
+    setTotalOrigins(data.total_origins);
+    setTotalDest(data.total_dest);
+  };
 
   return (
     <div>
@@ -73,16 +70,16 @@ const Flights = () => {
               <div className="card-title">Total Airlines</div>
               <div className="flights-values">{totalAirlines}</div>
             </div>
-            <div className="card-container airlines-card"id="total-flights">
+            <div className="card-container airlines-card" id="total-flights">
               <div className="card-title">Total Flights</div>
               <div className="flights-values">{totalFlights}</div>
             </div>
-            <div className="card-container airlines-card"id="total-origin">
+            <div className="card-container airlines-card" id="total-origin">
               <div className="card-title">No. of Origin</div>
               <div className="flights-values">{totalOrigins}</div>
             </div>
-            
-            <div className="card-container airlines-card"id="total-dest">
+
+            <div className="card-container airlines-card" id="total-dest">
               <div className="card-title">No. of Dest</div>
               <div className="flights-values">{totalDest}</div>
             </div>
@@ -108,7 +105,11 @@ const Flights = () => {
                 </Dropdown>
               </div>
               <div className="usmap-flights">
-                <UsGeoMap key={key} selectedAirline={selectedAirline} flightValues={handleFlightValues} />
+                <UsGeoMap
+                  key={key}
+                  selectedAirline={selectedAirline}
+                  flightValues={handleFlightValues}
+                />
               </div>
             </div>
           </div>
