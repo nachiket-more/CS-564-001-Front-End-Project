@@ -1,3 +1,17 @@
+:root {
+  --black: #020202;
+  --white: #ffffff;
+  --blue: #00425c;
+  --cyan: #c8e7ec;
+
+  --offwhite: #efefef;
+  --navyblue: #011638;
+  --purple: #9055A2;
+  --navyblue1: #2E294E;
+  --pink: #D499B9;
+  --pink1: #E8C1C5;
+}
+
 .App {
   text-align: center;
 }
@@ -12,6 +26,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 .App-header {
   background-color: #282c34;
