@@ -35,6 +35,14 @@
 }
 
 /* .App {
+=======
+  --purple: #9055A2;
+  --navyblue1: #2E294E;
+  --pink: #D499B9;
+  --pink1: #E8C1C5;
+}
+
+.App {
   text-align: center;
 }
 
@@ -42,6 +50,7 @@
   height: 40vmin;
   pointer-events: none;
 }
+
 
 .App-header {
   min-height: 100vh;

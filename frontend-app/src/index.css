@@ -1,10 +1,8 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+<<<<<<< HEAD
   
   color: #000;
   font-family: 'Montserrat', sans-serif !important;
@@ -13,10 +11,12 @@ body {
   background-color: var(--offwhite) !important;
   overflow-x: hidden;
 }
+=======
+>>>>>>> f3f5eb6a459d4d54f8a461c3b0951184b49875ac
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background-color: var(--offwhite) !important;
+
+  overflow-x: hidden;
 }
 
 /* .MuiTable-root{

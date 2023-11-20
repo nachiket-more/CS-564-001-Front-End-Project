@@ -1,0 +1,25 @@
+.nav-pills li a:hover,
+.nav-pills li a:focus {
+    background-color: var(--purple) !important;
+    text-decoration: none solid 4px;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--white);
+  }
+
+  .container-fluid{
+    width: 250px;
+    position: fixed;
+    margin: unset;
+    padding: 0;
+  }
+
+  .container-fluid .col{
+    width: 100%;
+    padding-top: 20px;
+  }
+  
+  
