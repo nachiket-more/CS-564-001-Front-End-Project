@@ -6,6 +6,8 @@ import Airlines from "./components/Airlines/Airlines";
 import Airports from "./components/Airports/Airports";
 import Flights from "./components/Flights/Flights";
 import Navbar from "./components/Navbar/Navbar";
+import { DataProvider } from './context/DataContext';
+
 
 import { useDispatch } from 'react-redux';
 import { fetchAirlinesData } from './redux/actions/airlineAction';
@@ -24,6 +26,7 @@ function App() {
 
 
   return (
+    <DataProvider>
     <div className="App">
       <Router>
         <div>
@@ -38,6 +41,7 @@ function App() {
         </div>
       </Router>
     </div>
+    </DataProvider>
   );
 }
 

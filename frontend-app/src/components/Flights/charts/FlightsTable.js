@@ -58,19 +58,19 @@ const FlightsTable = () => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>IATA_CODE</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">City</TableCell>
-            <TableCell align="right">State</TableCell>
+            <TableCell style={{ width: 'fit-content' }} align="center">IATA_CODE</TableCell>
+            <TableCell align="center">Name</TableCell>
+            <TableCell style={{ width: 'fit-content' }} align="center">City</TableCell>
+            <TableCell style={{ width: 'fit-content' }} align="center">State</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell align="right">{row.IATA_CODE}</StyledTableCell>
-              <StyledTableCell align="right">{row.Name}</StyledTableCell>
-              <StyledTableCell align="right">{row.City}</StyledTableCell>
-              <StyledTableCell align="right">{row.State}</StyledTableCell>
+              <StyledTableCell style={{ width: 'fit-content' }} align="center">{row.IATA_CODE}</StyledTableCell>
+              <StyledTableCell align="center">{row.Name}</StyledTableCell>
+              <StyledTableCell style={{ width: 'fit-content' }} align="center">{row.City}</StyledTableCell>
+              <StyledTableCell style={{ width: 'fit-content' }} align="center">{row.State}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

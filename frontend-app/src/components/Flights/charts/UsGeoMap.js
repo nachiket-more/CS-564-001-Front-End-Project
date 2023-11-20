@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import Tooltip from "@mui/material/Tooltip";
+
 import {
   ComposableMap,
   Geographies,
@@ -7,92 +10,246 @@ import {
   Line,
 } from "react-simple-maps";
 
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+import { DataContext } from "../../../context/DataContext";
+
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
-const markers = [
-  { markerOffset: 25, airport: "Lehigh Valley International Airport", city: "Allentown", coordinates: [-75.4404, 40.65236] },
-  { markerOffset: 25, airport: "McClellan-Palomar Airport", city: "San Diego", coordinates: [-117.27873, 33.12723] },
-  { markerOffset: 25, airport: "Abilene Regional Airport", city: "Abilene", coordinates: [-99.6819, 32.41132] },
-];
+const UsGeoMap = ({ selectedAirline, flightValues }) => {
+  const data = React.useContext(DataContext);
+  const [airlinesData, setAirlinesData] = React.useState(null);
+  const [flightsData, setFlightsData] = React.useState(null);
+  const [airportsData, setAirportsData] = React.useState(null);
 
-const routes = [
-  { dep: "Allentown", arr: "San Diego" },
-  { dep: "Allentown", arr: "Abilene" },
-];
+  const [routesData, setRoutesData] = React.useState(null);
+  const [markersData, setMarkersData] = React.useState(null);
+  const [routesTable, setRoutesTable] = React.useState([]);
 
-const UsGeoMap = () => {
-  // const [lineColors, setLineColors] = useState({
-  //   "Allentown-San Diego": "#D499B9",
-  //   "Allentown-Abilene": "#D499B9",
-  // });
+  const [key, setKey] = React.useState(0);
+  
 
-  // const handleButtonClick = () => {
-  //   // Change the color of the line between Allentown and Abilene to blue
-  //   setLineColors((prevColors) => ({
-  //     ...prevColors,
-  //     "Allentown-Abilene": "#0000FF", // Change to your desired color
-  //   }));
-  // };
+  React.useEffect(() => {
+    if (airportsData && flightsData && airlinesData) {
+      handleSetRoutes(selectedAirline);
+    }
+  }, [airportsData, flightsData, airlinesData]);
 
-  // React.useEffect(()=>{
-  //   console.log(lineColors)
-  // },[lineColors])
+  React.useEffect(() => {
+    if (
+      data.airportsData != null &&
+      data.flightsData != null &&
+      data.airlinesData != null
+    ) {
+      console.log(data);
+      setAirlinesData(data.airlinesData);
+      setFlightsData(data.flightsData);
+      setAirportsData(data.airportsData);
+
+      console.log(data.flightsData.length);
+    }
+  }, [data]);
+
+  const handleSetRoutes = (selectedItem) => {
+    console.log(selectedItem);
+    const airlineCode = airlinesData.find(
+      (airline) => airline.AIRLINE === selectedItem
+    ).IATA_CODE;
+
+    console.log("Airlines is: ", selectedItem, airlineCode);
+
+    const airlineFlights = flightsData.filter(
+      (flights) => flights.AIRLINE === airlineCode
+    );
+
+    const routes = airlineFlights.map(
+      ({ ORIGIN_AIRPORT, DESTINATION_AIRPORT }) => ({
+        dep_code: ORIGIN_AIRPORT,
+        dep:
+          airportsData.find((airport) => airport.IATA_CODE === ORIGIN_AIRPORT)
+            ?.CITY || ORIGIN_AIRPORT,
+        arr_code: DESTINATION_AIRPORT,
+        arr:
+          airportsData.find(
+            (airport) => airport.IATA_CODE === DESTINATION_AIRPORT
+          )?.CITY || DESTINATION_AIRPORT,
+      })
+    );
+
+    console.log("Flight Routes are: ", routes);
+
+    const flightRows = []
+    routes.forEach((item) => {
+      let newData = createData(item.dep, item.dep_code, item.arr, item.arr_code);
+      flightRows.push(newData);
+    });
+
+
+    setRoutesTable(flightRows)
+
+    // AIRPORT	CITY	STATE	COUNTRY	LATITUDE	LONGITUDE
+    const markers = Array.from(
+      new Set(routes.flatMap((route) => [route.dep, route.arr]))
+    ).map((city) => {
+      const airport = airportsData.find((airport) => airport.CITY === city);
+      return airport
+        ? {
+            markerOffset: 0,
+            code: airport.IATA_CODE,
+            city,
+            coordinates: [airport.LONGITUDE, airport.LATITUDE],
+          }
+        : null;
+    });
+    console.log("Flight Markers are: ", markers);
+    setRoutesData(routes);
+    setMarkersData(markers);
+
+    // flightValues()
+    flightValues({
+      total_flights: routes.length, 
+      total_origins: new Set(routes.map(obj => obj.dep)).size, 
+      total_dest: new Set(routes.map(obj => obj.arr)).size
+    })
+  };
+
+  // Table
+  function createData(
+    Origin: string,
+    Origin_Code: String,
+    Dest: string,
+    Dest_Code: sting
+  ) {
+    return { Origin, Origin_Code, Dest, Dest_Code };
+  }
+  
+ 
+
+
+  const [selectedRoute, setSelectedRoute] = useState({});
+  
+  const [updateKey, setUpdateKey] = useState(0);
+
+  const handleSelectFlight = (event, rowData) => {
+    setSelectedRoute({
+      dep: markersData.find((marker) => marker.city === rowData.Origin).coordinates,
+      arr: markersData.find((marker) => marker.city === rowData.Dest).coordinates
+    })
+  };
+
+
+  React.useEffect(() => {
+    setUpdateKey(updateKey + 1);
+  }, [selectedRoute]);
+
+
 
   return (
-    <div>
+    <div style={{ display: "flex", width:"100%" }}>
       {/* <button onClick={handleButtonClick}>Change Line Color</button> */}
-      <ComposableMap projection="geoAlbersUsa">
-        <Geographies geography={geoUrl}>
-          {({ geographies }) => (
-            <>
-              {geographies.map((geo) => (
-                <Geography
-                  key={geo.rsmKey}
-                  stroke="#9055A2"
-                  geography={geo}
-                  fill="#efefef"
-                />
-              ))}
-              {routes.map(({ dep, arr }) => {
-                const depMarker = markers.find((marker) => marker.city === dep);
-                const arrMarker = markers.find((marker) => marker.city === arr);
+      {markersData != null && (
+        <ComposableMap
+          style={{ width: "100%", height: "100%" }}
+          projection="geoAlbersUsa"
+        >
+          <Geographies geography={geoUrl}>
+            {({ geographies }) => (
+              <>
+                {geographies.map((geo) => (
+                  <Geography
+                    key={geo.rsmKey}
+                    stroke="#fff"
+                    geography={geo}
+                    fill="#e6e6e6"
+                  />
+                ))}
 
-                if (depMarker && arrMarker) {
-                  const key = `${dep}-${arr}`;
-                  return (
-                    <Line
-                      key={key}
-                      from={depMarker.coordinates}
-                      to={arrMarker.coordinates}
-                      stroke="#9055A2"
-                      strokeWidth={4}
-                      strokeLinecap="round"
-                    />
-                  );
-                }
+              <Line
+                key={updateKey}
+                from={selectedRoute.dep}
+                to={selectedRoute.arr}
+                stroke="#d499b9"
+                strokeWidth={3}
+                strokeLinecap="round"
+              />
+            
 
-                return null;
-              })}
-              {markers.map(({ airport, city, coordinates, markerOffset }) => (
-                <Marker key={city} coordinates={coordinates}>
-                  <circle r={5} fill="#011638" stroke="#011638" strokeWidth={2} />
-                  <text
+                {markersData.map(
+                  ({ markerOffset, code, city, coordinates }) => {
+                    return (
+                      <Tooltip title={city} placement="top">
+                        <Marker
+                          key={city}
+                          coordinates={coordinates}
+                          data-tip={code}
+                          data-for={`tooltip-${city}`}
+                        >
+                          <circle
+                            r={3}
+                            fill="#011638"
+                            stroke="#011638"
+                            strokeWidth={2}
+                          />
+                          {/* <text
                     textAnchor="middle"
                     y={markerOffset}
                     style={{
                       fontFamily: "Montserrat",
                       fill: "#011638",
-                      fontWeight: 600,
+                      fontWeight: 800,
+                      fontSize: "11px",
                     }}
                   >
-                    {city}
-                  </text>
-                </Marker>
-              ))}
-            </>
-          )}
-        </Geographies>
-      </ComposableMap>
+                    {code}
+                  </text> */}
+                        </Marker>
+                      </Tooltip>
+                    );
+                  }
+                )}
+              </>
+            )}
+          </Geographies>
+        </ComposableMap>
+      )}
+
+      <div className="card-container flights-list-card">
+        {/* <div className="card-title">{selectedAirline} Flights</div> */}
+        <div className="flights-list">
+                  {
+                    routesTable.length > 1 &&
+                    <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 0 }} aria-label="simple table">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell align="center" style={{ minWidth: 0 }}>ORIGIN</TableCell>
+                          <TableCell align="center" style={{ minWidth: 0 }}>DESTINATION</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {routesTable.map((row) => (
+                          <TableRow
+                            key={row.airline}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            onClick={(event) => handleSelectFlight(event, row)}
+                          >
+                            <TableCell align="center" style={{ minWidth: 0 }}>{row.Origin}</TableCell>
+                            <TableCell align="center" style={{ minWidth: 0 }}>{row.Dest}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                  }
+        </div>
+      </div>
     </div>
   );
 };
