@@ -1,0 +1,10 @@
+:root {
+  --black: #020202;
+  --white: #ffffff;
+  --blue: #00425c;
+  --cyan: #c8e7ec;
+}
+ 
+body {
+  background-color: var(--cyan);
+}
