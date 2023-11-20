@@ -149,7 +149,7 @@ const Airlines = () => {
           <div>
             <div className="card-title">Historical Performance of Airline</div>
             <Dropdown onSelect={handleSelectedAirline}>
-              <Dropdown.Toggle className="btn-primary" id="dropdown-basic">
+              <Dropdown.Toggle id="">
                 {selectedAirline}
               </Dropdown.Toggle>
               <Dropdown.Menu>

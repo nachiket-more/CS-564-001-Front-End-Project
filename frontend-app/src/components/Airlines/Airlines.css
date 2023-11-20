@@ -49,9 +49,10 @@
 
 
 .bottom{
-    min-height: 50vh;
+    height: 50vh;
     width: 100%;
 }
+
 
 
 .history-card > div{

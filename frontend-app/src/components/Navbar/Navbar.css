@@ -4,10 +4,15 @@
     text-decoration: none solid 4px;
 }
 
+.container-fluid .col{
+  text-align: center;
+}
+
 .logo {
     font-size: 2rem;
     font-weight: bold;
     color: var(--white);
+    width: fit-content;
   }
 
   .container-fluid{

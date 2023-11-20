@@ -21,11 +21,11 @@
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 7px;
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--offwhite);
+  background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -90,6 +90,10 @@
   border-color: var(--navyblue) !important;
 }
 
+.dropdown-toggle{
+  background-color: var(--navyblue) !important;
+  border-color: var(--navyblue) !important;
+}
 .dropdown-menu.show {
   display: block;
   max-height: 300px;

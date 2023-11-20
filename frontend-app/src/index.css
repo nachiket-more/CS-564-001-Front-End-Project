@@ -2,18 +2,11 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-<<<<<<< HEAD
   
   color: #000;
   font-family: 'Montserrat', sans-serif !important;
 
   
-  background-color: var(--offwhite) !important;
-  overflow-x: hidden;
-}
-=======
->>>>>>> f3f5eb6a459d4d54f8a461c3b0951184b49875ac
-
   background-color: var(--offwhite) !important;
 
   overflow-x: hidden;
