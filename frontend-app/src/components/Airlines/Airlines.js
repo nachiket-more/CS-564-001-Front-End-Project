@@ -6,11 +6,25 @@ import AirlinesHistory from "./charts/AirlinesHistory";
 
 import Dropdown from "react-bootstrap/Dropdown";
 
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+
+import { DataContext } from "../../context/DataContext";
 
 const Airlines = () => {
-  const airlinesData = useSelector((state) => state.airlines.airlinesData);
-  const flightsData = useSelector((state) => state.flights.flightsData);
+  const data = React.useContext(DataContext);
+  const [airlinesData, setAirlinesData] = React.useState(null);
+  const [flightsData, setFlightsData] = React.useState(null);
+
+  React.useEffect(() => {
+    if (data.flightsData != null && data.airlinesData != null) {
+      console.log(data);
+      setAirlinesData(data.airlinesData);
+      setFlightsData(data.flightsData);
+    }
+  }, [data]);
+
+  // const airlinesData = useSelector((state) => state.airlines.airlinesData);
+  // const flightsData = useSelector((state) => state.flights.flightsData);
 
   const [selectedAirline, setSelectedAirline] = React.useState();
 
@@ -100,7 +114,7 @@ const Airlines = () => {
   };
 
   React.useEffect(() => {
-    if (airlinesData.length > 1 && flightsData.length > 1) {
+    if (airlinesData != null && flightsData != null) {
       setSelectedAirline(
         airlinesData.length > 0 ? airlinesData[0].AIRLINE : ""
       );
@@ -123,7 +137,9 @@ const Airlines = () => {
   }, [airlineCount]);
 
   return (
-    <div className="page-container airlines-container">
+    <div>
+      {airlinesData != null && (
+<div className="page-container airlines-container">
       <div className="top">
 
         <div className="card-container airlines-card">
@@ -144,31 +160,39 @@ const Airlines = () => {
           </div>
         </div>
       </div>
-      <div className="bottom">
-        <div className="card-container history-card">
-          <div>
-            <div className="card-title">Historical Performance of Airline</div>
-            <Dropdown onSelect={handleSelectedAirline}>
-              <Dropdown.Toggle id="">
-                {selectedAirline}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {[...new Set(airlinesData.map((flight) => flight.AIRLINE))].map(
-                  (item, index) => (
-                    <Dropdown.Item key={index} eventKey={item} href="">
-                      {item}
-                    </Dropdown.Item>
-                  )
-                )}
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
 
-          <div className="history-delays">
-            {historyData.length > 1 && <AirlinesHistory data={historyData} />}
+
+          <div className="bottom">
+            <div className="card-container history-card">
+              <div>
+                <div className="card-title">
+                  Historical Performance of Airline
+                </div>
+                <Dropdown onSelect={handleSelectedAirline}>
+                  <Dropdown.Toggle className="btn-primary" id="dropdown-basic">
+                    {selectedAirline}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {[
+                      ...new Set(airlinesData.map((flight) => flight.AIRLINE)),
+                    ].map((item, index) => (
+                      <Dropdown.Item key={index} eventKey={item} href="">
+                        {item}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+
+              <div className="history-delays">
+                {historyData.length > 1 && (
+                  <AirlinesHistory data={historyData} />
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

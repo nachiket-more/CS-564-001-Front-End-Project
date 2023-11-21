@@ -12,15 +12,10 @@ body {
   overflow-x: hidden;
 }
 
-/* .MuiTable-root{
-  background-color: #21293A;
-}
+
 .MuiTableCell-root{
-  color: white !important;
-  border: none !important;
-  text-align: center !important;
   font-family: 'Montserrat', sans-serif !important;
-} */
+}
 
 .btn-primary{
   background-color: #011638;
@@ -53,3 +48,4 @@ body {
   color: white;
   background-color: unset;
 }
+
