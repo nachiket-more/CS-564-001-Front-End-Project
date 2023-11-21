@@ -19,7 +19,7 @@ const Flights = () => {
   const [selectedAirline, setSelectedAirline] = React.useState(
     "United Air Lines Inc."
   );
-  const [selectedOrigin, setSelectedOrigin] = React.useState("San Francisco");
+  const [selectedOrigin, setSelectedOrigin] = React.useState("select city");
 
   React.useEffect(() => {
     if (

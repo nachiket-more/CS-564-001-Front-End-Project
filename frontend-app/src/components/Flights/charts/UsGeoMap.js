@@ -122,15 +122,10 @@ const UsGeoMap = ({ selectedAirline,selectedOrigin, flightValues, flightOriginsD
     });
   };
 
-  // Table
-  function createData(
-    Origin: string,
-    Origin_Code: String,
-    Dest: string,
-    Dest_Code: sting
-  ) {
+  function createData(Origin, Origin_Code, Dest, Dest_Code) {
     return { Origin, Origin_Code, Dest, Dest_Code };
   }
+  
 
   const [selectedRoute, setSelectedRoute] = useState({});
 
@@ -168,37 +163,6 @@ const UsGeoMap = ({ selectedAirline,selectedOrigin, flightValues, flightOriginsD
                     fill="#e6e6e6"
                   />
                 ))}
-                {/* 
-                <Line
-                  key={updateKey}
-                  from={selectedRoute.dep}
-                  to={selectedRoute.arr}
-                  stroke="#9055A2"
-                  strokeWidth={3}
-                  strokeLinecap="round"
-                /> */}
-
-                {/* {markersData.map(({ dep, arr }) => {
-                const depMarker = markersData.find((marker) => marker.city === origin);
-                const arrMarker = markersData.find((marker) => marker.city === arr);
-
-                console.log(depMarker, arrMarker)
-                if (depMarker && arrMarker) {
-                  const key = `${dep}-${arr}`;
-                  return (
-                    <Line
-                      key={key}
-                      from={depMarker.coordinates}
-                      to={arrMarker.coordinates}
-                      stroke="#9055A2"
-                      strokeWidth={4}
-                      strokeLinecap="round"
-                    />
-                  );
-                }
-
-                return null;
-              })} */}
 
                 {routesData.map((route, index) => {
                   var from = null;
@@ -240,18 +204,6 @@ const UsGeoMap = ({ selectedAirline,selectedOrigin, flightValues, flightOriginsD
                             stroke="#011638"
                             strokeWidth={2}
                           />
-                          {/* <text
-                    textAnchor="middle"
-                    y={markerOffset}
-                    style={{
-                      fontFamily: "Montserrat",
-                      fill: "#011638",
-                      fontWeight: 800,
-                      fontSize: "11px",
-                    }}
-                  >
-                    {code}
-                  </text> */}
                         </Marker>
                       </Tooltip>
                     );

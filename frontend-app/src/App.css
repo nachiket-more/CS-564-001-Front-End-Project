@@ -69,10 +69,9 @@
 }
 
 .btn-primary {
-  background-color: var(--navyblue);
-  border-color: var(--navyblue);
-  border-radius: 50px;
-  font-weight: 600;
+  border-radius: 50px !important;
+  font-weight: 600 !important;
+  
 }
 .btn-primary::after {
   margin-left: 10px;
@@ -87,13 +86,14 @@
 .btn.show,
 .btn:first-child:active,
 :not(.btn-check) + .btn:active {
-  background-color: var(--navyblue) !important;
-  border-color: var(--navyblue) !important;
+  background-color: var(--offwhite) !important;
+  border-color: var(--offwhite) !important;
 }
 
 .dropdown-toggle{
-  background-color: var(--navyblue) !important;
-  border-color: var(--navyblue) !important;
+  background-color: var(--offwhite) !important;
+  border-color: var(--offwhite) !important;
+  color: var(--black) !important;
 }
 .dropdown-menu.show {
   display: block;
@@ -106,7 +106,7 @@
   color: var(--navyblue);
   font-weight: 500;
 }
-.dropdown-item:hover {
-  background-color: unset;
-  color: var(--navyblue);
+.dropdown-item:active, .dropdown-item:hover {
+  background-color: unset !important;
+  color: var(--navyblue) !important;
 }

@@ -160,34 +160,8 @@ const Airlines = () => {
           </div>
         </div>
       </div>
-      <div className="bottom">
-        <div className="card-container history-card">
-          <div>
-            <div className="card-title">Historical Performance of Airline</div>
-            <Dropdown onSelect={handleSelectedAirline}>
-              <Dropdown.Toggle id="">
-                {selectedAirline}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {[...new Set(airlinesData.map((flight) => flight.AIRLINE))].map(
-                  (item, index) => (
-                    <Dropdown.Item key={index} eventKey={item} href="">
-                      {item}
-                    </Dropdown.Item>
-                  )
-                )}
-              </div>
-            </div>
 
-            <div className="card-container airline-delays-card">
-              <div className="card-title">Airlines Delays</div>
-              <div className="airline-delays">
-                {airlineCount.length > 1 && (
-                  <AirlinesBarChart data={flightsBarData} />
-                )}
-              </div>
-            </div>
-          </div>
+
           <div className="bottom">
             <div className="card-container history-card">
               <div>
