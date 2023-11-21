@@ -17,8 +17,9 @@ const Flights = () => {
   const [key, setKey] = React.useState(0);
 
   const [selectedAirline, setSelectedAirline] = React.useState(
-    "American Airlines Inc."
+    "United Air Lines Inc."
   );
+  const [selectedOrigin, setSelectedOrigin] = React.useState("San Francisco");
 
   React.useEffect(() => {
     if (
@@ -26,15 +27,28 @@ const Flights = () => {
       data.flightsData != null &&
       data.airlinesData != null
     ) {
-      // console.log(data);
+      // console.log(data.airlinesData);
       setAirlinesData(data.airlinesData);
       setFlightsData(data.flightsData);
       setAirportsData(data.airportsData);
     }
   }, [data]);
+  
+  const handleSelectedOrigin = (selectedItem) => {
+    // console.log(selectedItem)
+    setSelectedOrigin(selectedItem);
+
+    // setHistoryData(handleHistoryData(airlineCode));
+  };
+
+  React.useEffect(() => {
+    setKey((prevKey) => prevKey + 1);
+  }, [selectedOrigin]);
+
 
   const handleSelectedAirline = (selectedItem) => {
     setSelectedAirline(selectedItem);
+    setSelectedOrigin("select city")
 
     // setHistoryData(handleHistoryData(airlineCode));
   };
@@ -61,6 +75,15 @@ const Flights = () => {
     setTotalDest(data.total_dest);
   };
 
+  const [flightOrigins, setFlightOrigins] = React.useState({});
+
+  const handleFlightOrigins = (data) => {
+
+    setFlightOrigins(data);
+    // console.log("Origins for ", selectedAirline, data);
+
+    // setHistoryData(handleHistoryData(airlineCode));
+  };
   return (
     <div>
       {airlinesData != null && (
@@ -89,28 +112,59 @@ const Flights = () => {
             <div className="card-container usmap-card">
               <div>
                 <div className="card-title">Flights Distribution</div>
-                <Dropdown onSelect={handleSelectedAirline}>
-                  <Dropdown.Toggle className="btn-primary" id="dropdown-basic">
-                    {selectedAirline}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    {[
-                      ...new Set(airlinesData.map((flight) => flight.AIRLINE)),
-                    ].map((item, index) => (
-                      <Dropdown.Item key={index} eventKey={item} href="">
-                        {item}
-                      </Dropdown.Item>
-                    ))}
-                  </Dropdown.Menu>
-                </Dropdown>
+                <div
+                  style={{
+                    display: "flex",
+                    columnGap: "10px",
+                  }}
+                >
+                  <Dropdown onSelect={handleSelectedAirline}>
+                    <Dropdown.Toggle
+                      className="btn-primary"
+                      id="dropdown-basic"
+                    >
+                      {selectedAirline}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {[
+                        ...new Set(
+                          airlinesData.map((flight) => flight.AIRLINE)
+                        ),
+                      ].map((item, index) => (
+                        <Dropdown.Item key={index} eventKey={item} href="">
+                          {item}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+
+                  <Dropdown onSelect={handleSelectedOrigin}>
+                    <Dropdown.Toggle
+                      className="btn-primary"
+                      id="dropdown-basic"
+                    >
+                      Origin: {selectedOrigin}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {Array.from(flightOrigins).map((item, index) => (
+                        <Dropdown.Item key={index} eventKey={item} href="">
+                          {item}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
               </div>
               <div className="usmap-flights">
                 <UsGeoMap
                   key={key}
                   selectedAirline={selectedAirline}
+                  selectedOrigin={selectedOrigin}
                   flightValues={handleFlightValues}
+                  flightOriginsData={handleFlightOrigins}
                 />
               </div>
+              
             </div>
           </div>
         </div>

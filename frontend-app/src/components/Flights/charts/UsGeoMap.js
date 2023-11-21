@@ -22,7 +22,7 @@ import { DataContext } from "../../../context/DataContext";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
-const UsGeoMap = ({ selectedAirline, flightValues }) => {
+const UsGeoMap = ({ selectedAirline,selectedOrigin, flightValues, flightOriginsData }) => {
   const data = React.useContext(DataContext);
   const [airlinesData, setAirlinesData] = React.useState(null);
   const [flightsData, setFlightsData] = React.useState(null);
@@ -33,6 +33,8 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
   const [routesTable, setRoutesTable] = React.useState([]);
 
   const [key, setKey] = React.useState(0);
+
+  const [flightOrigins, setFlightOrigins] = React.useState({});
 
   React.useEffect(() => {
     if (airportsData && flightsData && airlinesData) {
@@ -78,6 +80,9 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
     );
 
     // console.log("Flight Routes are: ", routes);
+    const origins = new Set(routes.map((obj) => obj.dep));
+    setFlightOrigins(origins);
+    flightOriginsData(origins);
 
     const flightRows = [];
     routes.forEach((item) => {
@@ -163,15 +168,61 @@ const UsGeoMap = ({ selectedAirline, flightValues }) => {
                     fill="#e6e6e6"
                   />
                 ))}
-
+                {/* 
                 <Line
                   key={updateKey}
                   from={selectedRoute.dep}
                   to={selectedRoute.arr}
-                  stroke="#d499b9"
+                  stroke="#9055A2"
                   strokeWidth={3}
                   strokeLinecap="round"
-                />
+                /> */}
+
+                {/* {markersData.map(({ dep, arr }) => {
+                const depMarker = markersData.find((marker) => marker.city === origin);
+                const arrMarker = markersData.find((marker) => marker.city === arr);
+
+                console.log(depMarker, arrMarker)
+                if (depMarker && arrMarker) {
+                  const key = `${dep}-${arr}`;
+                  return (
+                    <Line
+                      key={key}
+                      from={depMarker.coordinates}
+                      to={arrMarker.coordinates}
+                      stroke="#9055A2"
+                      strokeWidth={4}
+                      strokeLinecap="round"
+                    />
+                  );
+                }
+
+                return null;
+              })} */}
+
+                {routesData.map((route, index) => {
+                  var from = null;
+                  var to = null;
+
+                  if (route.dep === selectedOrigin) {
+                    from = markersData.find(
+                      (marker) => marker.city === selectedOrigin
+                    );
+                    to = markersData.find(
+                      (marker) => marker.city === route.arr
+                    );
+                    return (
+                      <Line
+                        key={updateKey}
+                        from={from.coordinates}
+                        to={to.coordinates}
+                        stroke="#9055A2"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                      />
+                    );
+                  }
+                })}
 
                 {markersData.map(
                   ({ markerOffset, code, city, coordinates }) => {

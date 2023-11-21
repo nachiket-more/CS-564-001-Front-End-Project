@@ -90,7 +90,10 @@
   width: 100%;
 }
 .usmap-card > div {
+
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .usmap-card > div > .dropdown {
   margin-left: auto;
