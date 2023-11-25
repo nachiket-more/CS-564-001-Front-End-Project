@@ -25,6 +25,7 @@ function App() {
             <Route exact path="/airlines" element={<Airlines />} />
             <Route exact path="/flights" element={<Flights />} />
             <Route exact path="/navbar" element={<Navbar />} />
+            
           </Routes>
         </div>
       </Router>
