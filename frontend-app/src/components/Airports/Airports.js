@@ -15,7 +15,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { DataContext } from "../../context/DataContext";
 
 import UsAirportMap from "./charts/UsAirportMap";
-import AirportsBarChart from "./charts/AirportsBarChart";
+import AirportsPieChart from "./charts/AirportsPieChart";
 
 const Airports = () => {
   const data = React.useContext(DataContext);
@@ -130,7 +130,7 @@ const Airports = () => {
           <div className="busiest-airports">
             {
               trafficData!=[] &&
-              <AirportsBarChart trafficData={trafficData} styled={{height: "100%", width: "fit-content", margin: "0 auto" }}/>
+              <AirportsPieChart trafficData={trafficData} styled={{height: "100%", width: "fit-content", margin: "0 auto" }}/>
             }
             
           </div>
