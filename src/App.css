@@ -1,0 +1,112 @@
+:root {
+  --black: #020202;
+  --white: #ffffff;
+  --blue: #00425c;
+  --cyan: #c8e7ec;
+
+  --offwhite: #efefef;
+  --navyblue: #011638;
+  --purple: #9055a2;
+  --navyblue1: #2e294e;
+  --pink: #d499b9;
+  --pink1: #e8c1c5;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--navyblue) transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--navyblue);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  height: 100px;
+}
+
+/* .App {
+=======
+  --purple: #9055A2;
+  --navyblue1: #2E294E;
+  --pink: #D499B9;
+  --pink1: #E8C1C5;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+} */
+
+.page-container {
+  width: calc(100% - 250px);
+  margin-left: 250px;
+  padding-right: 10px;
+}
+
+.btn-primary {
+  border-radius: 50px !important;
+  font-weight: 600 !important;
+  
+}
+.btn-primary::after {
+  margin-left: 10px;
+  top: 2px;
+  position: relative;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  background-color: var(--offwhite) !important;
+  border-color: var(--offwhite) !important;
+}
+
+.dropdown-toggle{
+  background-color: var(--offwhite) !important;
+  border-color: var(--offwhite) !important;
+  color: var(--black) !important;
+}
+.dropdown-menu.show {
+  display: block;
+  max-height: 300px;
+  overflow-y: scroll;
+  background-color: var(--white);
+  border-radius: 10px;
+}
+.dropdown-item {
+  color: var(--navyblue);
+  font-weight: 500;
+}
+.dropdown-item:active, .dropdown-item:hover {
+  background-color: unset !important;
+  color: var(--navyblue) !important;
+}
