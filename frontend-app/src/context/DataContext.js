@@ -13,7 +13,7 @@ const DataProvider = ({ children }) => {
   useEffect(() => {
     // Fetch data from your API here
     const fetchAirlineData = async () => {
-      axios.get('http://localhost:5050/airlines/all')
+      axios.get('https://frontend-nodejs.onrender.com/airlines/all')
       .then((response) => {
         setAirlinesData(response.data)
       })
@@ -24,7 +24,7 @@ const DataProvider = ({ children }) => {
 
     
     const fetchFlightData = async () => {
-      axios.get('http://localhost:5050/flights/all')
+      axios.get('https://frontend-nodejs.onrender.com/flights/all')
       .then((response) => {
         setFlightsData(response.data)
       })
@@ -35,7 +35,7 @@ const DataProvider = ({ children }) => {
 
     
     const fetchAirportData = async () => {
-      axios.get('http://localhost:5050/airports/all')
+      axios.get('https://frontend-nodejs.onrender.com/airports/all')
       .then((response) => {
         setAirportsData(response.data)
       })

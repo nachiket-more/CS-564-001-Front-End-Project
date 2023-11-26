@@ -33,7 +33,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5050",
+  "homepage": "/airlines",
   "eslintConfig": {
     "extends": [
       "react-app",
