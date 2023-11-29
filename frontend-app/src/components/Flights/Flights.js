@@ -1,6 +1,6 @@
 import React from "react";
 import "./Flights.css";
-import UsGeoMap from "./charts/UsGeoMap";
+import UsGeoMap from "./charts/UsFlightMap";
 import { useSelector } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
 

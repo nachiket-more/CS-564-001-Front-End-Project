@@ -8,6 +8,25 @@
   text-align: center;
 }
 
+.dashboard{
+  position: fixed;
+  top: 0;
+  background-color: var(--white);
+  width: calc(100vw - 250px);
+  margin-left: 250px;
+  height: 76px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.dashboard span{
+  font-size: 2rem;
+  font-weight: bold;
+  width: fit-content;
+}
+
 .logo {
     font-size: 2rem;
     font-weight: bold;

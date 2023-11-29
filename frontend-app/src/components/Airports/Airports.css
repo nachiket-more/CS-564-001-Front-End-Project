@@ -1,0 +1,53 @@
+.airports-container .top{
+    display: flex;
+    flex-direction: row;
+    height: 50vh;
+    width: 100%;
+}
+
+.airports-container .airports-map-card{
+
+    width: 50%;
+    height: calc(100% - 20px);
+}
+
+.airports-container .airports-map{
+    height: 100%;
+}
+
+.airports-container .busiest-airports-card{
+    
+    width: 50%;
+    height: calc(100% - 20px);
+}
+
+.airports-container .airports-map-card > div {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .airports-map-card > div > .dropdown {
+    margin-left: auto;
+  }
+
+
+
+
+.airports-container .bottom{
+    height: 80vh;
+    width: 100%;
+}
+
+.airports-container .airports-list-card{
+    height: 100%;
+}
+.airports-container .airports-list{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.airports-container .busiest-airports{
+    height: 100%;
+}

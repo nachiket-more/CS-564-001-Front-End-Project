@@ -5,6 +5,12 @@ import "./Navbar.css";
 
 const Navbar = () => {
   return (
+    
+<div>
+<div className="dashboard">
+  
+<span className="fs-4 d-none d-sm-inline ">Dashboard</span>
+</div>
     <div className="container-fluid">
       <div className="col col-md-2 min-vh-100 bg-dark">
         <h1 className="logo d-flex d-none d-sm-inline">
@@ -32,6 +38,7 @@ const Navbar = () => {
       </div>
       {/* </div> */}
     </div>
+</div>
   );
 };
 

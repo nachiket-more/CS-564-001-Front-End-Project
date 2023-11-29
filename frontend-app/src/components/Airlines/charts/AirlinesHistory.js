@@ -8,6 +8,11 @@ export const options = {
   hAxis: {
     textPosition: "none",
   },
+  vAxis: {
+    viewWindow: {
+      max: 350, // Set your desired maximum value for the y-axis
+    }
+  }
 };
 
 const AirlinesHistory = ({ data }) => {
