@@ -3,12 +3,11 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 // Define the route to get all flights
-
 router.get("/all", async (req, res) => {
   try {
-    const collection = mongoose.connection.collection("flights");
+    const flightsCollection = mongoose.connection.collection("flights");
 
-    const flights = await collection.find({}).toArray();
+    const flights = await flightsCollection.find({}).toArray();
 
     res.json(flights);
   } catch (error) {
