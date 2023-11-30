@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
-import Tooltip from "@mui/material/Tooltip";
+import React, { useState, useContext, useEffect, useCallback } from 'react';
+import Tooltip from '@mui/material/Tooltip';
 import {
   ComposableMap,
   Geographies,
   Geography,
   Marker,
   Line,
-} from "react-simple-maps";
+} from 'react-simple-maps';
 import {
   Table,
   TableBody,
@@ -15,10 +15,10 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@mui/material";
-import { DataContext } from "../../../context/DataContext";
+} from '@mui/material';
+import { DataContext } from '../../../context/DataContext';
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
 const UsGeoMap = ({
   selectedAirline,
@@ -93,7 +93,7 @@ const UsGeoMap = ({
             }
           : null;
       });
-      console.log("Flight Markers are: ", markers);
+      console.log('Flight Markers are: ', markers);
       setRoutesData(routes);
       setMarkersData(markers);
 
@@ -154,11 +154,11 @@ const UsGeoMap = ({
   }, [selectedRoute, updateKey]);
 
   return (
-    <div style={{ display: "flex", width: "100%" }}>
+    <div style={{ display: 'flex', width: '100%' }}>
       {markersData != null && (
         <ComposableMap
-          style={{ width: "100%", height: "100%" }}
-          projection="geoAlbersUsa"
+          style={{ width: '100%', height: '100%' }}
+          projection='geoAlbersUsa'
         >
           <Geographies geography={geoUrl}>
             {({ geographies }) => (
@@ -166,9 +166,9 @@ const UsGeoMap = ({
                 {geographies.map((geo) => (
                   <Geography
                     key={geo.rsmKey}
-                    stroke="#fff"
+                    stroke='#fff'
                     geography={geo}
-                    fill="#e6e6e6"
+                    fill='#e6e6e6'
                   />
                 ))}
 
@@ -188,9 +188,9 @@ const UsGeoMap = ({
                         key={updateKey}
                         from={from.coordinates}
                         to={to.coordinates}
-                        stroke="#9055A2"
+                        stroke='#9055A2'
                         strokeWidth={2}
-                        strokeLinecap="round"
+                        strokeLinecap='round'
                       />
                     );
                   }
@@ -199,7 +199,7 @@ const UsGeoMap = ({
 
                 {markersData.map(({ code, city, coordinates }) => {
                   return (
-                    <Tooltip title={city} placement="top">
+                    <Tooltip title={city} placement='top'>
                       <Marker
                         key={city}
                         coordinates={coordinates}
@@ -208,8 +208,8 @@ const UsGeoMap = ({
                       >
                         <circle
                           r={3}
-                          fill="#011638"
-                          stroke="#011638"
+                          fill='#011638'
+                          stroke='#011638'
                           strokeWidth={2}
                         />
                       </Marker>
@@ -222,17 +222,17 @@ const UsGeoMap = ({
         </ComposableMap>
       )}
 
-      <div className="card-container flights-list-card">
-        <div className="flights-list">
+      <div className='card-container flights-list-card'>
+        <div className='flights-list'>
           {routesTable.length > 1 && (
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 0 }} aria-label="simple table">
+              <Table sx={{ minWidth: 0 }} aria-label='simple table'>
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center" style={{ minWidth: 0 }}>
+                    <TableCell align='center' style={{ minWidth: 0 }}>
                       ORIGIN
                     </TableCell>
-                    <TableCell align="center" style={{ minWidth: 0 }}>
+                    <TableCell align='center' style={{ minWidth: 0 }}>
                       DESTINATION
                     </TableCell>
                   </TableRow>
@@ -241,13 +241,13 @@ const UsGeoMap = ({
                   {routesTable.map((row) => (
                     <TableRow
                       key={row.airline}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       onClick={(event) => handleSelectFlight(event, row)}
                     >
-                      <TableCell align="center" style={{ minWidth: 0 }}>
+                      <TableCell align='center' style={{ minWidth: 0 }}>
                         {row.Origin}
                       </TableCell>
-                      <TableCell align="center" style={{ minWidth: 0 }}>
+                      <TableCell align='center' style={{ minWidth: 0 }}>
                         {row.Dest}
                       </TableCell>
                     </TableRow>
