@@ -8,10 +8,6 @@
   width: 100%;
 }
 
-.flights-container .city-tooltip {
-  /* opacity: 0; */
-}
-
 #total-airlines {
   background-color: var(--pink);
   color: white;
@@ -44,11 +40,6 @@
   width: calc(100% - 20px);
 }
 
-/* .flights-container .airlines-card{
-    width: 40%;
-    height: calc(100% - 20px);
-} */
-
 .flights-container .card-title {
   font-weight: 700;
   font-size: 17px !important;
@@ -56,26 +47,6 @@
   text-align: left;
   margin-bottom: 1vw;
 }
-
-/* .flights-container .airlines{
-    height: 100%;
-    width: 100%;
-}
-
-
-
-
-.flights-container .airline-delays-card{
-    width: calc(60% - 20px);
-    height: calc(100% - 20px);
-}
-
-
-.flights-container .airline-delays{
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-} */
 
 .flights-container .bottom {
   min-height: 50vh;
@@ -113,7 +84,7 @@
   padding-left: 0;
   padding-right: 0;
   margin: 0;
-  /* height: calc(100% - 30px); */
+
   width: 40%;
 }
 

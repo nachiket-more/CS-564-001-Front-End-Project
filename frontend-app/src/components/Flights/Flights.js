@@ -1,123 +1,97 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Flights.css";
 import UsGeoMap from "./charts/UsFlightMap";
-import { useSelector } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
 
 import { DataContext } from "../../context/DataContext";
 
 const Flights = () => {
-  // const airlinesData = useSelector((state) => state.airlines.airlinesData);
+  // Context for accessing shared data
+  const data = useContext(DataContext);
 
-  const data = React.useContext(DataContext);
-  const [airlinesData, setAirlinesData] = React.useState(null);
-  const [flightsData, setFlightsData] = React.useState(null);
-  const [airportsData, setAirportsData] = React.useState(null);
-
-  const [key, setKey] = React.useState(0);
-
-  const [selectedAirline, setSelectedAirline] = React.useState(
+  // States for holding data
+  const [airlinesData, setAirlinesData] = useState(null);
+  const [, setFlightsData] = useState(null);
+  const [, setAirportsData] = useState(null);
+  const [key, setKey] = useState(0);
+  const [selectedAirline, setSelectedAirline] = useState(
     "United Air Lines Inc."
   );
-  const [selectedOrigin, setSelectedOrigin] = React.useState("select city");
+  const [selectedOrigin, setSelectedOrigin] = useState("select city");
+  const [totalAirlines] = useState(13);
+  const [totalFlights, setTotalFlights] = useState(null);
+  const [totalOrigins, setTotalOrigins] = useState(null);
+  const [totalDest, setTotalDest] = useState(null);
+  const [flightOrigins, setFlightOrigins] = useState({});
 
-  React.useEffect(() => {
+  // Effect to set data when it becomes available
+  useEffect(() => {
     if (
       data.airportsData != null &&
       data.flightsData != null &&
       data.airlinesData != null
     ) {
-      // console.log(data.airlinesData);
       setAirlinesData(data.airlinesData);
       setFlightsData(data.flightsData);
       setAirportsData(data.airportsData);
     }
   }, [data]);
-  
-  const handleSelectedOrigin = (selectedItem) => {
-    // console.log(selectedItem)
-    setSelectedOrigin(selectedItem);
 
-    // setHistoryData(handleHistoryData(airlineCode));
+  // Handler for selecting origin
+  const handleSelectedOrigin = (selectedItem) => {
+    setSelectedOrigin(selectedItem);
   };
 
-  React.useEffect(() => {
+  // Effect to update key when selected origin changes
+  useEffect(() => {
     setKey((prevKey) => prevKey + 1);
   }, [selectedOrigin]);
 
-
+  // Handler for selecting airline
   const handleSelectedAirline = (selectedItem) => {
     setSelectedAirline(selectedItem);
-    setSelectedOrigin("select city")
-
-    // setHistoryData(handleHistoryData(airlineCode));
+    setSelectedOrigin("select city");
   };
 
-  React.useEffect(() => {
+  // Effect to update key when selected airline changes
+  useEffect(() => {
     setKey((prevKey) => prevKey + 1);
   }, [selectedAirline]);
 
-  // React.useEffect(()=>{
-  //   if (airportsData && flightsData && airlinesData) {
-  //     handleSelectedAirline("Virgin America")
-  //   }
-  // },[airportsData, flightsData, airlinesData])
-
-  const [totalAirlines, setTotalAirlines] = React.useState(13);
-  const [totalFlights, setTotalFlights] = React.useState(null);
-  const [totalOrigins, setTotalOrigins] = React.useState(null);
-  const [totalDest, setTotalDest] = React.useState(null);
-
+  // Handler for updating flight values
   const handleFlightValues = (data) => {
-    // console.log('Flight values from Flight.js: ', data)
     setTotalFlights(data.total_flights);
     setTotalOrigins(data.total_origins);
     setTotalDest(data.total_dest);
   };
 
-  const [flightOrigins, setFlightOrigins] = React.useState({});
-
+  // Handler for updating flight origins
   const handleFlightOrigins = (data) => {
-
     setFlightOrigins(data);
-    // console.log("Origins for ", selectedAirline, data);
-
-    // setHistoryData(handleHistoryData(airlineCode));
   };
+
   return (
     <div>
       {airlinesData != null && (
         <div className="page-container flights-container">
           <div className="top">
-            <div className="card-container airlines-card" id="total-airlines">
-              <div className="card-title">Total Airlines</div>
-              <div className="flights-values">{totalAirlines}</div>
-            </div>
-            <div className="card-container airlines-card" id="total-flights">
-              <div className="card-title">Total Flights</div>
-              <div className="flights-values">{totalFlights}</div>
-            </div>
-            <div className="card-container airlines-card" id="total-origin">
-              <div className="card-title">No. of Origin</div>
-              <div className="flights-values">{totalOrigins}</div>
-            </div>
-
-            <div className="card-container airlines-card" id="total-dest">
-              <div className="card-title">No. of Dest</div>
-              <div className="flights-values">{totalDest}</div>
-            </div>
+            {flightCards("Total Airlines", totalAirlines, "total-airlines")}
+            {flightCards("Total Flights", totalFlights, "total-flights")}
+            {flightCards("No. of Origin", totalOrigins, "total-origin")}
+            {flightCards("No. of Dest", totalDest, "total-dest")}
           </div>
 
           <div className="bottom">
             <div className="card-container usmap-card">
               <div>
-                <div className="card-title">Flights Distribution</div>
+                {<div className="card-title">Flights Distribution</div>}
                 <div
                   style={{
                     display: "flex",
                     columnGap: "10px",
                   }}
                 >
+                  {/* Dropdown for selecting airline */}
                   <Dropdown onSelect={handleSelectedAirline}>
                     <Dropdown.Toggle
                       className="btn-primary"
@@ -138,6 +112,7 @@ const Flights = () => {
                     </Dropdown.Menu>
                   </Dropdown>
 
+                  {/* Dropdown for selecting origin */}
                   <Dropdown onSelect={handleSelectedOrigin}>
                     <Dropdown.Toggle
                       className="btn-primary"
@@ -164,11 +139,20 @@ const Flights = () => {
                   flightOriginsData={handleFlightOrigins}
                 />
               </div>
-              
             </div>
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+// Function to generate flight cards
+const flightCards = (title, value, id) => {
+  return (
+    <div className="card-container airlines-card" id={id}>
+      <div className="card-title">{title}</div>
+      <div className="flights-values">{value}</div>
     </div>
   );
 };
