@@ -26,7 +26,7 @@ function App() {
 
             <Routes>
               <Route path="/" element={<Navigate to="/airlines" />} />
-              <Route path="/index.js" element={<Navigate to="/airlines" />} />
+              <Route path="/index.html" element={<Navigate to="/airlines" />} />
               <Route exact path="/airports" element={<Airports />} />
               <Route exact path="/airlines" element={<Airlines />} />
               <Route exact path="/flights" element={<Flights />} />
