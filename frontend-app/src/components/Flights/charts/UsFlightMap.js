@@ -103,14 +103,14 @@ const UsGeoMap = ({ selectedAirline,selectedOrigin, flightValues, flightOriginsD
       const airport = airportsData.find((airport) => airport.CITY === city);
       return airport
         ? {
-            markerOffset: 0,
+            markerOffset: 1,
             code: airport.IATA_CODE,
             city,
             coordinates: [airport.LONGITUDE, airport.LATITUDE],
           }
         : null;
     });
-    // console.log("Flight Markers are: ", markers);
+    console.log("Flight Markers are: ", markers);
     setRoutesData(routes);
     setMarkersData(markers);
 

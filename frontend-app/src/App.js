@@ -13,18 +13,9 @@ import Flights from "./components/Flights/Flights";
 import Navbar from "./components/Navbar/Navbar";
 import { DataProvider } from "./context/DataContext";
 
-import { useDispatch } from "react-redux";
-import { fetchAirlinesData } from "./redux/actions/airlineAction";
-import { fetchFlightsData } from "./redux/actions/flightsAction";
 
 function App() {
-  const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    // Fetch airlines and flights data when the component mounts
-    dispatch(fetchAirlinesData());
-    dispatch(fetchFlightsData());
-  }, [dispatch]);
 
   return (
     <DataProvider>
