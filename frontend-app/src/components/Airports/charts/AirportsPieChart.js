@@ -1,6 +1,7 @@
 import React from "react";
 import { Chart } from "react-google-charts";
 
+// Sample data for the pie chart
 export const data = [
   ["Task", "Hours per Day"],
   ["Work", 11],
@@ -10,13 +11,15 @@ export const data = [
   ["Sleep", 7],
 ];
 
-export const options = {
+// Options for the pie chart
+export const pieChartOptions = {
   width: "auto",
   height: "100%",
   fontName: "Montserrat",
   legend: {
     position: "none",
   },
+  // Custom colors for each slice of the pie chart
   slices: [
     { color: "#011638" },
     { color: "#9055A2" },
@@ -35,17 +38,20 @@ export const options = {
   ],
 };
 
-const AirportsBarChart = ({trafficData}) => {
+/**
+ * Function for rendering a PieChart using react-google-charts.
+ * @param {Array} trafficData - Data to be displayed in the pie chart.
+ */
+const AirportsBarChart = ({ trafficData }) => {
   return (
     <Chart
       chartType="PieChart"
       data={trafficData}
-      options={options}
+      options={pieChartOptions}
       width={"100%"}
       height={"100%"}
     />
   );
-}
-
+};
 
 export default AirportsBarChart;
