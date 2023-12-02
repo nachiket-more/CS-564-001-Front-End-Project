@@ -9,12 +9,11 @@ The Flight Data Visualization and Analysis App is a React.js dashboard designed 
  - CSS
  - Bootstrap
  - Node.js
- - Express.js
  - MongoDB
 
 
 ## Features
-The dashboard applicatin inclueds three components: Airlines, Airports, Flights a single-page application that includes the following features:
+The dashboard application inclueds three components: Airlines, Airports, Flights a single-page application that includes the following features:
 
 - Airline Distribution: Display the activity levels of airlines by the number of flights, identifying the most and least active carriers.
 - Airport Locations: Provide a geographical visualization of airport locations.
